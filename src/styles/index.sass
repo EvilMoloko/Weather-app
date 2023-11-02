@@ -7,8 +7,10 @@
 *
     box-sizing: border-box
 
+
 body
     font-family: 'Montserrat', sans-serif
+    background: var(#{--body-background-default})
 
 main 
     margin-top: 30px
@@ -46,6 +48,7 @@ main
     .change-theme-btn
         width: 35px
         height: 35px
+        cursor: pointer
     .select-city-btn
         margin-left: 20px
 
@@ -56,7 +59,7 @@ main
     border: none
     border-radius: 20px
     box-shadow: $box-shadow
-    background-color: $light-background
+    background-color: var(#{--component-background-default})
     padding: 20px
     display: flex
     flex-direction: column
@@ -70,7 +73,7 @@ main
     &__temperature
         display: flex
         flex-wrap: wrap
-        color: $base-color
+        color: var(#{--text-color-default})
         font-size: 40px
         font-style: normal
         line-height: normal
@@ -94,7 +97,7 @@ main
     &__time, &__city
         margin-left: -2px
         max-height: 30px
-        color: $light-color
+        color: $neutral-color
         font-size: 25px
         font-weight: 400
         line-height: normal
@@ -106,7 +109,7 @@ main
     border: none
     border-radius: 20px
     box-shadow: $box-shadow
-    background-color: $light-background
+    background-color: var(#{--component-background-default})
     background-image: url("../assets/images/Cloud_image.png")
     background-repeat: no-repeat
     background-position: right top
@@ -115,23 +118,23 @@ main
     flex-direction: column
     justify-content: space-between
     &__item
-        color: $base-color
+        color: var(#{--text-color-default})
         font-size: 14px
         font-weight: 400
         display: flex
         align-items: center
         &__icon
-            border-color: #000
             width: 38px
             height: 38px
             border-radius: 100%
             box-shadow: $box-shadow
+            background-color: $light-background
             filter: drop-shadow(1px 4px 10px rgba(71, 147, 255, 0.20))
             display: flex
             justify-content: center
             align-items: center
         span
-            color: $light-color
+            color: $neutral-color
             margin: 0 20px
             min-width: 96px
         &__text
@@ -147,9 +150,9 @@ main
         padding: 0 20px
         margin-right: 15px
         border-radius: 5px
-        background-color: $light-background
+        background-color: var(#{--component-background-default})
         box-shadow: $box-shadow
-        color: $base-color
+        color: var(#{--text-color-default})
         font-size: 18px
         font-style: normal
         font-weight: 400
@@ -157,6 +160,8 @@ main
         display: flex
         align-items: center
         cursor: pointer
+        &:hover
+            box-shadow:0px 0px 10px 5px rgba(180, 180, 180, 0.25)
         &_active
             background-color: $primary-color
             color: #fff
@@ -164,7 +169,7 @@ main
     width: 100%
     padding: 10px 0
     border-radius: 0px 0px 20px 20px
-    background: $light-background
+    background: var(#{--component-background-default})
     box-shadow: $box-shadow
     display: grid
     grid-template-columns: repeat(auto-fit, minmax(169px, 1fr))
@@ -176,15 +181,17 @@ main
         padding: 11px
         margin: 10px 
         border-radius: 10px
-        background-color: $primary-background
-        color: $base-color
+        background-color: var(#{--card-background-default})
+        color: var(#{--text-color-default})
         line-height: normal
         cursor: pointer
+        &:hover
+            box-shadow: 0px 0px 10px 5px rgba(180, 180, 180, 0.25)
         &__week-day
             font-size: 18px
             font-weight: 500
         &__calendar-day
-            color: $light-color
+            color: $neutral-color
             font-size: 14px
             font-weight: 400
             margin-top: 7px
@@ -198,11 +205,11 @@ main
             font-weight: 500
             margin-top: 12px
         &__temperture-feels
-            color: $light-color
+            color: $neutral-color
             font-size: 13px
             font-weight: 400
         &__text   
-            color: $light-color
+            color: $neutral-color
             font-size: 13px
             font-weight: 400
             margin-top: 6px

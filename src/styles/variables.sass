@@ -1,6 +1,33 @@
 $primary-color: #4793FF
-$primary-background: rgba(71, 147, 255, 0.2)
-$base-color: #000
-$light-color: #939CB0
+$neutral-color: #939CB0
 $light-background: #fff
 $box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25)
+
+$body-background-dark: #0D1117
+$body-background-light: #fff
+
+$component-background-dark: #4F4F4F
+$component-background-light: #fff
+
+$card-background-dark: #2E3035
+$card-background-light: rgba(71, 147, 255, 0.2)
+
+$text-color-dark: #fff
+$text-color-light: #000
+
+:root 
+    --body-background-dark: #{$body-background-dark}
+    --body-background-light: #{$body-background-light}
+    --body-background-default: var(#{--body-background-light})
+
+    --component-background-dark: #{$component-background-dark}
+    --component-background-light: #{$component-background-light}
+    --component-background-default: var(#{--component-background-light})
+
+    --card-background-dark: #{$card-background-dark}
+    --card-background-light: #{$card-background-light}
+    --card-background-default: var(#{--card-background-light})
+
+    --text-color-dark: #{$text-color-dark}
+    --text-color-light: #{$text-color-light}
+    --text-color-default: var(#{--text-color-light})
