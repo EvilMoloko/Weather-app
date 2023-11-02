@@ -1,0 +1,269 @@
+@import '~normalize.css'
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap')
+
+@import ./variables
+
+*
+    box-sizing: border-box
+
+body
+    font-family: 'Montserrat', sans-serif
+
+main 
+    margin-top: 30px
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+
+.container
+    max-width: 1200px
+    margin: 0 auto
+
+.none 
+    display: none
+
+.header 
+    margin-top: 20px
+    width: 100&
+    height: 65px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    &__left, &__right
+        display: flex
+        align-items: center
+    .weather-app-logo
+        svg
+            width: 65px
+            height: 65px
+    .weather-app-name 
+        margin-left: 20px
+        font-size: 25px
+        font-weight: bold
+        text-transform: uppercase
+        color: $primary-color
+    .change-theme-btn
+        width: 35px
+        height: 35px
+    .select-city-btn
+        margin-left: 20px
+
+.this-day
+    margin-bottom: 15px
+    max-width: 400px
+    height: 300px
+    border: none
+    border-radius: 20px
+    box-shadow: $box-shadow
+    background-color: $light-background
+    padding: 20px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    &__head
+        max-height: 155px
+        max-weight: 100%
+        display: flex
+        justify-content: space-between
+        align-items: center
+    &__temperature
+        display: flex
+        flex-wrap: wrap
+        color: $base-color
+        font-size: 40px
+        font-style: normal
+        line-height: normal
+        font-weight: 400
+        span
+            color: $primary-color
+            font-size: 96px
+            font-weight: 500
+            margin-bottom: -11px
+    &__weather-icon
+        svg
+            width: 119px
+            height: 119px
+    &__foot
+        vertical-align: middle
+        height: 75px
+        max-weight: 100%
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+    &__time, &__city
+        margin-left: -2px
+        max-height: 30px
+        color: $light-color
+        font-size: 25px
+        font-weight: 400
+        line-height: normal
+
+.this-day-info
+    margin-bottom: 15px
+    width: 750px
+    min-height: 300px
+    border: none
+    border-radius: 20px
+    box-shadow: $box-shadow
+    background-color: $light-background
+    background-image: url("../assets/images/Cloud_image.png")
+    background-repeat: no-repeat
+    background-position: right top
+    padding: 42px 32px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    &__item
+        color: $base-color
+        font-size: 14px
+        font-weight: 400
+        display: flex
+        align-items: center
+        &__icon
+            border-color: #000
+            width: 38px
+            height: 38px
+            border-radius: 100%
+            box-shadow: $box-shadow
+            filter: drop-shadow(1px 4px 10px rgba(71, 147, 255, 0.20))
+            display: flex
+            justify-content: center
+            align-items: center
+        span
+            color: $light-color
+            margin: 0 20px
+            min-width: 96px
+        &__text
+
+.weather-list-filter
+    height: 35px
+    margin-top: 50px
+    margin-bottom: 0
+    display: flex
+    justify-content: flex-start
+    padding: 0
+    &__item
+        padding: 0 20px
+        margin-right: 15px
+        border-radius: 5px
+        background-color: $light-background
+        box-shadow: $box-shadow
+        color: $base-color
+        font-size: 18px
+        font-style: normal
+        font-weight: 400
+        line-height: normal
+        display: flex
+        align-items: center
+        cursor: pointer
+        &_active
+            background-color: $primary-color
+            color: #fff
+.weather-list__wrapper
+    width: 100%
+    padding: 10px 0
+    border-radius: 0px 0px 20px 20px
+    background: $light-background
+    box-shadow: $box-shadow
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(169px, 1fr))
+    justify-items: center
+    margin-top: 7px
+    .weather-list__card
+        width: 149px
+        height: 200px
+        padding: 11px
+        margin: 10px 
+        border-radius: 10px
+        background-color: $primary-background
+        color: $base-color
+        line-height: normal
+        cursor: pointer
+        &__week-day
+            font-size: 18px
+            font-weight: 500
+        &__calendar-day
+            color: $light-color
+            font-size: 14px
+            font-weight: 400
+            margin-top: 7px
+        &__weather-icon
+            width: 48px
+            height: 48px
+            margin-left: -4px
+            margin-top: 12px
+        &__temperature
+            font-size: 18px
+            font-weight: 500
+            margin-top: 12px
+        &__temperture-feels
+            color: $light-color
+            font-size: 13px
+            font-weight: 400
+        &__text   
+            color: $light-color
+            font-size: 13px
+            font-weight: 400
+            margin-top: 6px
+
+.popup-wrapper
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 3
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100vw
+    height: 100vh
+    background: rgba(0, 0, 0, 0.25)
+.popup-weather-item
+    position: relative
+    z-index: 5
+    background-image: none
+    padding: 42px
+    display: flex
+    flex-direction: row
+    .this-day
+        box-shadow: none
+        max-width: 194px
+        height: 218px
+        padding: 0
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+        justify-content: center
+        margin-bottom: 0
+        &__temperature
+            flex-direction: column
+            font-size: 25px
+            span
+                line-height: normal
+                margin-bottom: 0
+                font-size: 60px
+        &__weather-icon
+            margin-top: 12px
+            svg
+                width: 53px
+                height: 53px
+        &__foot
+            margin-top: 12px
+            height: auto
+        &__time, &__city
+            margin-left: 0
+            font-size: 15px
+            line-height: normal
+    .wrapper
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+    .popup-close-btn
+        position: absolute
+        top: 20px
+        right: 20px
+        width: 20px
+        height: 20px
+        cursor: pointer
+
+ 
