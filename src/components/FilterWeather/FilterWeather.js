@@ -1,29 +1,24 @@
-import { useCallback, useMemo, useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import FilterWeatherItem from "../FilterWeatherItem/FilterWeatherItem";
 
 const FilterWeather = () => {
-    const [currentFilter, setCurrentFilter] = useState('На 10 дней')
-    const filters = ['На неделю','На 10 дней','На месяц']
-    console.log(currentFilter)
+    const {activeWeatherFilter, allWeatherFilters} = useSelector(state => state.filterWeatherSliceReducer)
 
     useEffect(()=>{
-        console.log('Rendered')
-    },[currentFilter])
+     console.log('rerenderFilter')
+    },[activeWeatherFilter])
 
-    const changeActiveFilter = (text) => {
-        setCurrentFilter(text)
-    }
-
-    const filterItems = filters.map((item, i) => {
+    const filterItems = allWeatherFilters.map((item) => {
         let classes = 'weather-list-filter__item'
-        if (item == currentFilter) {
+        if (item == activeWeatherFilter) {
             classes += ' weather-list-filter__item_active'
         }
 
-        return <FilterWeatherItem key={i}
+        return <FilterWeatherItem key={item}
                                 text={item}
                                 classes={classes}
-                                onChangeActiveFilter={(item)=>changeActiveFilter(item)}/>
+                                />
     })
 
     return (

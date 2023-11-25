@@ -1,30 +1,49 @@
 import { GlobalSvgSelector } from "../../assets/icons/GlobalSvgSelector";
+import LoadingIcon from "../LoadingIcon/LoadingIcon";
+import { interpretWindDirection, interpretWindSpeed, convertGPaToMmHg } from "../../functionsWeatherInterpreter/functionsWeatherInterpeter";
 
-const ThisDayInfo = ({data}) => {
-    const {temperature, pressure, wind, precipitation} = data
+const ThisDayInfo = ({weather, isLoading}) => {
+    const {temperature_2m, apparent_temperature, surface_pressure, precipitation, wind_speed_10m, wind_direction_10m} = weather
+
+    const windDirection = interpretWindDirection(wind_direction_10m)
+    const windSpeed = interpretWindSpeed(wind_speed_10m)
+    const pressureMmHg = convertGPaToMmHg(surface_pressure)
 
     return (
         <div className="this-day-info">
-            <div className="this-day-info__item">
-                <div className="this-day-info__item__icon"><GlobalSvgSelector id="temp" /></div>
-                <span>Температура</span>
-                <div className="this-day-info__item__text">{temperature.value}° - ощущается как {temperature.feels}°</div>
-            </div>
-            <div className="this-day-info__item">
-                <div className="this-day-info__item__icon"><GlobalSvgSelector id="pressure" /></div>
-                <span>Давление</span>
-                <div className="this-day-info__item__text">{pressure.value} мм ртутного столба - {pressure.level.toLowerCase()}</div>
-            </div>
-            <div className="this-day-info__item">
-                <div className="this-day-info__item__icon"><GlobalSvgSelector id="precipitation" /></div>
-                <span>Осадки</span>
-                <div className="this-day-info__item__text">{precipitation}</div>
-            </div>
-            <div className="this-day-info__item">
-                <div className="this-day-info__item__icon"><GlobalSvgSelector id="wind" /></div>
-                <span>Ветер</span>
-                <div className="this-day-info__item__text">{wind.speed} м/с {wind.direction.toLowerCase()} - {wind.level.toLowerCase()}</div>
-            </div>
+            { isLoading ? <LoadingIcon/> : 
+                <>
+                    <div className="this-day-info__item">
+                        <div className="this-day-info__item__icon"><GlobalSvgSelector id="temp" /></div>
+                        <span>Температура</span>
+                        <div className="this-day-info__item__text">
+                            {Math.round(temperature_2m)}° - ощущается как {Math.round(apparent_temperature)}°
+                        </div>
+                    </div>
+                    <div className="this-day-info__item">
+                        <div className="this-day-info__item__icon"><GlobalSvgSelector id="pressure" /></div>
+                        <span>Давление</span>
+                        <div className="this-day-info__item__text">{pressureMmHg} мм ртутного столба</div>
+                    </div>
+                    <div className="this-day-info__item">
+                        <div className="this-day-info__item__icon"><GlobalSvgSelector id="precipitation" /></div>
+                        <span>Осадки</span>
+                        <div className="this-day-info__item__text">
+                            {
+                                (precipitation) ? (precipitation.toFixed(1) + " мм") : ""
+                                ||
+                                "Без осадков" 
+                            }
+                        </div>
+                    </div>
+                    <div className="this-day-info__item">
+                        <div className="this-day-info__item__icon"><GlobalSvgSelector id="wind" /></div>
+                        <span>Ветер</span>
+                        <div className="this-day-info__item__text">{wind_speed_10m.toFixed(1)} м/с {windDirection} - {windSpeed}
+                        </div>
+                    </div>
+                </>
+            } 
       </div>
     )
 }

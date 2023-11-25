@@ -11,7 +11,7 @@ const WeatherList = ({days, time}) => {
 	})
 	
     return (
-        <div class="weather-list__wrapper">
+        <div className="weather-list__wrapper">
 			{weatherCards}
         </div>
     )

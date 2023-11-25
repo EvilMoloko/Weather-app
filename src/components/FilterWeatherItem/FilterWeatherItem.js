@@ -1,12 +1,13 @@
+import { useDispatch } from "react-redux"
+import  {changeFilterWeather}  from "../../slices/filterWeatherSlice"
 
-const FilterWeatherItem = ({id, text, classes, onChangeActiveFilter}) => {
-    const changeActiveFilter = (e) => {
-        onChangeActiveFilter(e)
-    }
+const FilterWeatherItem = ({id, text, classes}) => {
+    const dispatch = useDispatch()
+
     return (
         <div key={id}
             className={classes}
-            onClick={() => changeActiveFilter(text)}
+            onClick={() => dispatch(changeFilterWeather(text))}
             >{text}</div>
     )
 }

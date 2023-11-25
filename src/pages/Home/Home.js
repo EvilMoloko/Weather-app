@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCurrentWeather } from "../../store/thunks/fetchCurrentWeather";
 import FilterWeather from "../../components/FilterWeather/FilterWeather";
 import HeaderWeather from "../../components/HeaderWeather/HeaderWeather";
-import PopupWeatherItem from "../../components/PopupWeatherItem/PopupWeatherItem";
 import ThisDay from "../../components/ThisDay/ThisDay";
 import ThisDayInfo from "../../components/ThisDayInfo/ThisDayInfo";
 import WeatherList from "../../components/WeatherList/WeatherList";
@@ -221,12 +223,28 @@ const Home = () => {
         time: correctedTime(date)
     }
 
+    const {currentWeather, isLoading, respone} = useSelector(state => state.currentWeatherSliceReducer)
+    const {activeCity} = useSelector(state => state.citySliceReducer)
+    const dispatch = useDispatch()
+    
+    useEffect(() => {
+        dispatch(fetchCurrentWeather(activeCity))
+    },[activeCity])
+
+    useEffect(() => {
+        const intervalCurrentWeatherId = setInterval(() => {
+            dispatch(fetchCurrentWeather('псков'))
+        }, 300000) 
+        // не обновляется само через 5 мин
+        return () => clearInterval(intervalCurrentWeatherId)
+    },[dispatch])
+
     return (
         <>
             <HeaderWeather/>
             <main>   
-                <ThisDay data={data}/>
-                <ThisDayInfo data={data.days[0]}/>
+                <ThisDay weather={currentWeather} isLoading={isLoading} city={activeCity}/>
+                <ThisDayInfo weather={currentWeather} isLoading={isLoading}/>
                 <FilterWeather/>
                 <WeatherList days={data.days} time={data.time}/>
             </main>
