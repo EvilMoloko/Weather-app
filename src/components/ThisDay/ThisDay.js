@@ -1,16 +1,18 @@
 import { useEffect } from "react";
-import axios from "axios";
+import React from 'react'
 import { GlobalSvgSelector } from "../../assets/icons/GlobalSvgSelector";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
-import { correctedTime, convertPrecipitationToIcon } from "../../functionsWeatherInterpreter/functionsWeatherInterpeter";
+import { correctedTime, interpretToIconWeatherCode } from "../../functionsWeatherInterpreter/functionsWeatherInterpeter";
 
-const ThisDay = ({weather, isLoading, city}) => {
+const ThisDay = React.memo(({weather, isLoading, city}) => {
 
-    const {temperature_2m, time} = weather
+    const {temperature_2m, time, weather_code} = weather
+    const timeDay = correctedTime(time)
+    const weatherIcon = interpretToIconWeatherCode(weather_code)
 
-    console.log('obnovaThisDay')
-
-    const weatherIcon = convertPrecipitationToIcon(weather);
+    useEffect(()=> {
+        console.log('ThisDay')
+    },[weather])
 
     return (
         <div className="this-day">
@@ -19,20 +21,20 @@ const ThisDay = ({weather, isLoading, city}) => {
                     <div className="this-day__head">
                         <div className="this-day__temperature">
                             <span>{Math.round(temperature_2m)}°</span>
-                            {'Сегодня'} 
+                            {'Сейчас'} 
                         </div>
                         <div className="this-day__weather-icon">
                             <GlobalSvgSelector id={weatherIcon} />
                         </div>
                     </div>
                     <div className="this-day__foot">
-                        <div className="this-day__time">Время: {correctedTime(time)}</div>
+                        <div className="this-day__time">Данные на: {timeDay}</div>
                         <div className="this-day__city">Город: {city.charAt(0).toUpperCase() + city.slice(1)}</div>
                     </div>
                 </>
             }
         </div>
     )
-}
+})
 
 export default ThisDay;

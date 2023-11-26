@@ -11,12 +11,12 @@ const FilterWeather = () => {
 
     const filterItems = allWeatherFilters.map((item) => {
         let classes = 'weather-list-filter__item'
-        if (item == activeWeatherFilter) {
+        if (item.value == activeWeatherFilter) {
             classes += ' weather-list-filter__item_active'
         }
 
-        return <FilterWeatherItem key={item}
-                                text={item}
+        return <FilterWeatherItem key={item.label}
+                                item={item}
                                 classes={classes}
                                 />
     })

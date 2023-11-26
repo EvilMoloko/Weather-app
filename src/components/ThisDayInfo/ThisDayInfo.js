@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { GlobalSvgSelector } from "../../assets/icons/GlobalSvgSelector";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import { interpretWindDirection, interpretWindSpeed, convertGPaToMmHg } from "../../functionsWeatherInterpreter/functionsWeatherInterpeter";
@@ -8,6 +9,10 @@ const ThisDayInfo = ({weather, isLoading}) => {
     const windDirection = interpretWindDirection(wind_direction_10m)
     const windSpeed = interpretWindSpeed(wind_speed_10m)
     const pressureMmHg = convertGPaToMmHg(surface_pressure)
+
+    useEffect(()=> {
+        console.log('InfoDay')
+    },[weather])
 
     return (
         <div className="this-day-info">
@@ -39,7 +44,8 @@ const ThisDayInfo = ({weather, isLoading}) => {
                     <div className="this-day-info__item">
                         <div className="this-day-info__item__icon"><GlobalSvgSelector id="wind" /></div>
                         <span>Ветер</span>
-                        <div className="this-day-info__item__text">{wind_speed_10m.toFixed(1)} м/с {windDirection} - {windSpeed}
+                        <div className="this-day-info__item__text">
+                            {wind_speed_10m.toFixed(1)} м/с {windDirection} - {windSpeed}
                         </div>
                     </div>
                 </>

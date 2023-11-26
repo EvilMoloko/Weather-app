@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     allWeatherFilters: [
-        'На неделю',
-        'На 10 дней',
-        'На месяц'
+        {label:'На неделю', value: 7},
+        {label:'На 10 дней', value: 10},
+        {label:'На 16 дней', value: 16},
     ],
-    activeWeatherFilter: 'На неделю',
+    activeWeatherFilter: 7,
     isLoading: false,
 }
 

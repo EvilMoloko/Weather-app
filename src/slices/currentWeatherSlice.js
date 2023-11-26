@@ -17,7 +17,7 @@ const initialState = {
         wind_speed_10m: 15.5,
         wind_direction_10m: 202,
     },
-    isLoading: true,
+    isLoadingCurrentWeather: true,
     respone: {
         status: 0,
         message: ''
@@ -29,19 +29,18 @@ export const currentWeatherSlice = createSlice({
     initialState,
     reducers: {
         fetchCurrentWeather (state) {
-            state.isLoading = true
+            state.isLoadingCurrentWeather = true
         },
         fetchCurrentWeatherSuccess (state, action) {
             state.currentWeather = action.payload.data.current;
-            console.log(action.payload.data)
-            state.isLoading = false;
+            state.isLoadingCurrentWeather = false;
             state.response = {
                 status: action.payload.status,
                 message: action.payload.statusText
             }
         },
         fetchCurrentWeatherError (state, action) {
-            state.isLoading = false;
+            state.isLoadingCurrentWeather = false;
             state.respone = {
                 status: action.payload.status,
                 message: action.payload.statusText

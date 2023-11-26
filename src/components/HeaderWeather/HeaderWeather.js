@@ -4,11 +4,11 @@ import { GlobalSvgSelector } from "../../assets/icons/GlobalSvgSelector";
 import Select from "react-select/async";
 import useTheme from '../../hooks/useTheme';
 import { changeCity } from '../../slices/citySlice';
-import axios from 'axios';
+import storage from '../../model/storage';
+import { WeatherService } from '../../services/WeatherService';
 
 const HeaderWeather = () => {
     const theme = useTheme()
-    console.log(theme)
 
     const dispatch = useDispatch()
 
@@ -17,6 +17,8 @@ const HeaderWeather = () => {
     const options = citiesList.map(item => {
         return {label: item, value: item}
     })
+
+    const defaultValue = options.filter(item => item.value === storage.getItem('city'))
 
     const sortCitiesByAlphabet = (arr) => {
         return arr.slice().sort((a,b) => a.value.localeCompare(b.value))
@@ -68,11 +70,9 @@ const HeaderWeather = () => {
     const loadOptions = useCallback(async (inputValue, callback) => {
         if (inputValue.length > 1) {
             try {
-                const response = await axios.get(
-                    `https://geocoding-api.open-meteo.com/v1/search?name=${inputValue}&count=3&language=ru`
-                );
-                if (response.data.results && response.data.results.length > 1) {
-                    const loadedOptions = response.data.results.map(item => ({ label: item.name, value: item.name }));
+                const response = await WeatherService.getCitiesCoordinates(inputValue, 5)
+                if (response) {
+                    const loadedOptions = response.citiesData.map(item => ({ label: item.name, value: item.name }));
                     callback(sortCitiesByAlphabet(loadedOptions));
                 }
             } catch (error) {
@@ -82,11 +82,6 @@ const HeaderWeather = () => {
         }
     }, []);
 
-    const formatGroupLabel = () => (
-        <div>
-          Выберите город или введите название
-        </div>
-      );
 
     return (
             <header className="header">
@@ -98,15 +93,13 @@ const HeaderWeather = () => {
                     <div className="change-theme-btn" onClick={changeTheme}><GlobalSvgSelector id='change-theme' /></div>
                     <div className="select-city-btn" >
                     <Select 
-                                groupLabel={formatGroupLabel}
-                                contextMenu={'[eq'}
                                 loadOptions={loadOptions}
                                 hideSelectedOptions
                                 blurInputOnSelect
                                 openMenuOnFocus
                                 noOptionsMessage={customNoOptionsMessage}
                                 placeholder={'Введите город'}
-                                defaultValue={options[0]}
+                                defaultValue={defaultValue}
                                 defaultOptions={sortedOptions}
                                 styles={colourStyles}
                                 onChange={(selectedOption) => dispatch(changeCity(selectedOption.value))}
