@@ -211,7 +211,7 @@ export function interpretWeatherCodeToDescr(weatherCode) {
         case 67:
             return "Ледяной дождь"
         case 71:
-            return "Небольшой снег"
+            return "Cнег"
         case 73:
             return "Снег"
         case 75:
@@ -225,7 +225,7 @@ export function interpretWeatherCodeToDescr(weatherCode) {
         case 82:
             return "Ливень"
         case 85:
-            return "Снегопад"
+            return "Снег"
         case 86:
             return "Снегопад"
         case 95:
