@@ -7,13 +7,16 @@ export const fetchSixteenDaysWeather = (payload) => {
             dispatch(sixteenDaysWeatherSlice.actions.fetchSixteenDaysWeather())
             const response = await WeatherService.get16DaysWeather(payload)
             if (response.status === 200) {
-                dispatch(sixteenDaysWeatherSlice.actions.fetchSixteenDaysWeatherSuccess(response))
+                dispatch(
+                    sixteenDaysWeatherSlice.actions.fetchSixteenDaysWeatherSuccess(response)
+                )
             } else {
-                dispatch(sixteenDaysWeatherSlice.actions.fetchSixteenDaysWeatherError(response))
+                dispatch(
+                    sixteenDaysWeatherSlice.actions.fetchSixteenDaysWeatherError(response)
+                )
             }
         } catch (error) {
             console.log(error)
         }
-        
     }
 }

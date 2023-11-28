@@ -6,11 +6,11 @@ const changeCssRootVariables = (theme) => {
         'component-background',
         'card-background',
         'text-color'
-    ];
+    ]
 
     components.forEach(component => {
         root.style.setProperty(`--${component}-default`,`var(--${component}-${theme})`)
     })
 }
 
-export default changeCssRootVariables;
+export default changeCssRootVariables

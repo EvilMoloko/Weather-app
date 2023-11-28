@@ -1,54 +1,56 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCurrentWeather } from "../../store/thunks/fetchCurrentWeather";
-import { fetchSixteenDaysWeather } from "../../store/thunks/fetchSixteenDaysWeather";
-import FilterWeather from "../../components/FilterWeather/FilterWeather";
-import HeaderWeather from "../../components/HeaderWeather/HeaderWeather";
-import ThisDay from "../../components/ThisDay/ThisDay";
-import ThisDayInfo from "../../components/ThisDayInfo/ThisDayInfo";
-import WeatherList from "../../components/WeatherList/WeatherList";
-
-
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchCurrentWeather } from "../../store/thunks/fetchCurrentWeather"
+import { fetchSixteenDaysWeather } from "../../store/thunks/fetchSixteenDaysWeather"
+import FilterWeather from "../../components/FilterWeather/FilterWeather"
+import HeaderWeather from "../../components/HeaderWeather/HeaderWeather"
+import ThisDay from "../../components/ThisDay/ThisDay"
+import ThisDayInfo from "../../components/ThisDayInfo/ThisDayInfo"
+import WeatherList from "../../components/WeatherList/WeatherList"
 
 const Home = () => {
-
-    const {currentWeather, isLoadingCurrentWeather} = useSelector(state => state.currentWeatherSliceReducer)
-    const {activeCity} = useSelector(state => state.citySliceReducer)
-    const {activeWeatherFilter} = useSelector(state => state.filterWeatherSliceReducer)
+    const { currentWeather, isLoadingCurrentWeather } = useSelector(
+        (state) => state.currentWeatherSliceReducer
+    )
+    const { activeCity } = useSelector((state) => state.citySliceReducer)
+    const { activeWeatherFilter } = useSelector(
+        (state) => state.filterWeatherSliceReducer
+    )
     const dispatch = useDispatch()
-    const {daily, hourlySurfacePressure, isLoadingSixteenDaysWeather} = useSelector(state => state.sixteenDaysWeatherSliceReducer)
-    
+    const { daily, hourlySurfacePressure, isLoadingSixteenDaysWeather } =
+        useSelector((state) => state.sixteenDaysWeatherSliceReducer)
+
     useEffect(() => {
         dispatch(fetchCurrentWeather(activeCity))
         dispatch(fetchSixteenDaysWeather(activeCity))
-    },[activeCity])
+    }, [activeCity])
 
     useEffect(() => {
         const intervalCurrentWeatherId = setInterval(() => {
             dispatch(fetchCurrentWeather(activeCity))
-        }, 300000) 
+        }, 300000)
         // не обновляется само через 5 мин
         return () => clearInterval(intervalCurrentWeatherId)
-    },[dispatch])
+    }, [dispatch])
 
     return (
         <>
-            <HeaderWeather/>
-            <main>   
+            <HeaderWeather />
+            <main>
                 <ThisDay
                     weather={currentWeather}
                     isLoading={isLoadingCurrentWeather}
                     city={activeCity}
                 />
-                <ThisDayInfo 
-                    weather={currentWeather} 
+                <ThisDayInfo
+                    weather={currentWeather}
                     isLoading={isLoadingCurrentWeather}
                 />
-                <FilterWeather/>
-                <WeatherList 
-                    weather={daily} 
+                <FilterWeather />
+                <WeatherList
+                    weather={daily}
                     pressure={hourlySurfacePressure}
-                    activeWeatherFilter={activeWeatherFilter} 
+                    activeWeatherFilter={activeWeatherFilter}
                     isLoading={isLoadingSixteenDaysWeather}
                     city={activeCity}
                 />
@@ -57,4 +59,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Home

@@ -3,22 +3,22 @@ import storage from "../model/storage"
 
 const initialState = {
     citiesList: [
-        'Санкт-Петербург',
-        'Москва',
-        'Астрахань',
-        'Владивосток',
-        'Псков', 
+        "Санкт-Петербург",
+        "Москва",
+        "Астрахань",
+        "Владивосток",
+        "Псков",
     ],
-    activeCity: storage.getItem('city') || 'Санкт-Петербург',
+    activeCity: storage.getItem("city") || "Санкт-Петербург",
     isLoading: false,
     respone: {
         status: 0,
-        message: ''
-    }
+        message: "",
+    },
 }
 
 export const citySlice = createSlice({
-    name: 'cityWeather',
+    name: "cityWeather",
     initialState,
     reducers: {
         // fetchCity (state) {
@@ -39,13 +39,13 @@ export const citySlice = createSlice({
         //         message: action.payload.statusText
         //     }
         // },
-        changeCity (state, action) {
-            state.activeCity = action.payload;
-            storage.setItem('city', action.payload)
-            state.isLoading = false;
-        } 
-    }
+        changeCity(state, action) {
+            state.activeCity = action.payload
+            storage.setItem("city", action.payload)
+            state.isLoading = false
+        },
+    },
 })
 
-export const {changeCity} = citySlice.actions;
-export default citySlice.reducer;
+export const { changeCity } = citySlice.actions
+export default citySlice.reducer

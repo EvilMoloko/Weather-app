@@ -12,40 +12,41 @@ const initialState = {
         showers_sum: [0],
         snowfall_sum: [0],
         wind_speed_10m_max: [0],
-        wind_direction_10m_dominant: [0]   
+        wind_direction_10m_dominant: [0],
     },
     hourlySurfacePressure: [0],
     isLoadingSixteenDaysWeather: true,
     respone: {
         status: 0,
-        message: ''
-    }
+        message: "",
+    },
 }
 
 export const sixteenDaysWeatherSlice = createSlice({
-    name: 'sixteenDaysWeather',
+    name: "sixteenDaysWeather",
     initialState,
     reducers: {
-        fetchSixteenDaysWeather (state) {
+        fetchSixteenDaysWeather(state) {
             state.isLoadingSixteenDaysWeather = true
         },
-        fetchSixteenDaysWeatherSuccess (state, action) {
-            state.daily = action.payload.data.daily;
-            state.hourlySurfacePressure = action.payload.data.hourly.surface_pressure; 
-            state.isLoadingSixteenDaysWeather = false;
+        fetchSixteenDaysWeatherSuccess(state, action) {
+            state.daily = action.payload.data.daily
+            state.hourlySurfacePressure =
+                action.payload.data.hourly.surface_pressure
+            state.isLoadingSixteenDaysWeather = false
             state.response = {
                 status: action.payload.status,
-                message: action.payload.statusText
+                message: action.payload.statusText,
             }
         },
-        fetchSixteenDaysWeatherError (state, action) {
-            state.isLoadingSixteenDaysWeather = false;
+        fetchSixteenDaysWeatherError(state, action) {
+            state.isLoadingSixteenDaysWeather = false
             state.respone = {
                 status: action.payload.status,
-                message: action.payload.statusText
+                message: action.payload.statusText,
             }
-        }
-    }
+        },
+    },
 })
 
-export default sixteenDaysWeatherSlice.reducer;
+export default sixteenDaysWeatherSlice.reducer

@@ -21,9 +21,7 @@ class WeatherService {
                         )
                     })
                     return ({citiesData} || 0)
-                }
-               
-                
+                }      
             })
         )
     }

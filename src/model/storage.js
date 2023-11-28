@@ -1,7 +1,6 @@
-
 const storage = {
     setItem: (name, item) => {
-        localStorage.setItem(name,JSON.stringify(item))
+        localStorage.setItem(name, JSON.stringify(item))
     },
 
     getItem: (name) => {
@@ -10,7 +9,7 @@ const storage = {
         if (item) {
             return JSON.parse(item)
         }
-    }
+    },
 }
 
-export default storage;
+export default storage

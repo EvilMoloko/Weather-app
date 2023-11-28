@@ -6,9 +6,9 @@ const initialState = {
         temperature_2m: 20,
         apparent_temperature: -6.6,
         is_day: 1,
-        precipitation: 0.10,
-        rain: 0.00,
-        showers: 0.00,
+        precipitation: 0.1,
+        rain: 0.0,
+        showers: 0.0,
         snowfall: 0.07,
         weather_code: 73,
         cloud_cover: 100,
@@ -20,33 +20,33 @@ const initialState = {
     isLoadingCurrentWeather: true,
     respone: {
         status: 0,
-        message: ''
-    }
+        message: "",
+    },
 }
 
 export const currentWeatherSlice = createSlice({
-    name: 'currentWeather',
+    name: "currentWeather",
     initialState,
     reducers: {
-        fetchCurrentWeather (state) {
+        fetchCurrentWeather(state) {
             state.isLoadingCurrentWeather = true
         },
-        fetchCurrentWeatherSuccess (state, action) {
-            state.currentWeather = action.payload.data.current;
-            state.isLoadingCurrentWeather = false;
+        fetchCurrentWeatherSuccess(state, action) {
+            state.currentWeather = action.payload.data.current
+            state.isLoadingCurrentWeather = false
             state.response = {
                 status: action.payload.status,
-                message: action.payload.statusText
+                message: action.payload.statusText,
             }
         },
-        fetchCurrentWeatherError (state, action) {
-            state.isLoadingCurrentWeather = false;
+        fetchCurrentWeatherError(state, action) {
+            state.isLoadingCurrentWeather = false
             state.respone = {
                 status: action.payload.status,
-                message: action.payload.statusText
+                message: action.payload.statusText,
             }
-        }
-    }
+        },
+    },
 })
 
-export default currentWeatherSlice.reducer;
+export default currentWeatherSlice.reducer

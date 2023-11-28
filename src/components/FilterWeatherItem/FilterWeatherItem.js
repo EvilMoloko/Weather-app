@@ -1,15 +1,18 @@
 import { useDispatch } from "react-redux"
-import  {changeFilterWeather}  from "../../slices/filterWeatherSlice"
+import { changeFilterWeather } from "../../slices/filterWeatherSlice"
 
-const FilterWeatherItem = ({id, item, classes}) => {
+const FilterWeatherItem = ({ id, item, classes }) => {
     const dispatch = useDispatch()
 
     return (
-        <div key={id}
+        <div
+            key={id}
             className={classes}
             onClick={() => dispatch(changeFilterWeather(item.value))}
-            >{item.label}</div>
+        >
+            {item.label}
+        </div>
     )
 }
 
-export default FilterWeatherItem;
+export default FilterWeatherItem
